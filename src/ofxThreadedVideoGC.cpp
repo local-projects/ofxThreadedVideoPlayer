@@ -20,7 +20,7 @@ ofxThreadedVideoGC* ofxThreadedVideoGC::instance(){
 }
 
 
-void ofxThreadedVideoGC::addToGarbageQueue(ofxThreadedVideoPlayer*p){
+void ofxThreadedVideoGC::addToGarbageQueue(ofAVFoundationPlayer*p){
 	lock();
 		videosPendingDeletion.push_back(p);
 	unlock();
@@ -32,7 +32,7 @@ void ofxThreadedVideoGC::threadedFunction(){
 	while (isThreadRunning()) {
 		sleep(1);
 		lock();
-		ofxThreadedVideoPlayer * toDel = NULL;
+		ofAVFoundationPlayer * toDel = NULL;
 		if(videosPendingDeletion.size()){
 			//cout << ">> about to delete"<< endl;
 			toDel = videosPendingDeletion[0];
@@ -42,7 +42,9 @@ void ofxThreadedVideoGC::threadedFunction(){
 		unlock();
 		if (toDel){ //we do this to avoid blocking the main thread inside the mutex
 					//as this is the "long" call
-			delete toDel;
+            toDel->close();
+            toDel->getPixels().clear();
+//			delete toDel;
 		}
 	}
 }

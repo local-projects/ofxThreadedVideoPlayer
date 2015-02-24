@@ -6,20 +6,16 @@
 //
 //
 
-#ifndef __BaseApp__ofxThreadedVideoGC__
-#define __BaseApp__ofxThreadedVideoGC__
+#pragma once
 
 #include "ofMain.h"
-#include "ofxThreadedVideoPlayer.h"
 
-class ofxThreadedVideoPlayer;
-
-class ofxThreadedVideoGC: public ofThread{
+class ofxThreadedVideoGC : public ofThread{
 
 public:
 
 	static ofxThreadedVideoGC* instance();
-	void addToGarbageQueue(ofxThreadedVideoPlayer*);
+	void addToGarbageQueue(ofAVFoundationPlayer*);
 
 
 private:
@@ -27,9 +23,7 @@ private:
 	ofxThreadedVideoGC(){}; //use instance()!
 	static ofxThreadedVideoGC*	singleton;
 
-	vector<ofxThreadedVideoPlayer*> videosPendingDeletion;
+	vector<ofAVFoundationPlayer*> videosPendingDeletion;
 
 	void threadedFunction();
 };
-
-#endif /* defined(__BaseApp__ofxThreadedVideoGC__) */
