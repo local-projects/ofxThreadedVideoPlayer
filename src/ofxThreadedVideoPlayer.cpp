@@ -41,6 +41,13 @@ void ofxThreadedVideoPlayer::setVolume(float v){
 	}
 }
 
+void ofxThreadedVideoPlayer::setAudioDeviceID(string _deviceID){
+	if (player){
+		player->setAudioDevice(_deviceID);
+	}
+}
+
+
 
 void ofxThreadedVideoPlayer::deleteMe(){
 	//ofLogWarning() << "ofxThreadedVideoPlayer:deleteMe() " << this << endl;

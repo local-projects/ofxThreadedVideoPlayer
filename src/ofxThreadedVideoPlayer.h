@@ -45,6 +45,7 @@ public:
 	float getDuration();
 
 	void setVolume(float v);
+	void setAudioDeviceID(string _deviceID);
 
 	bool isReadyForPlayback();
 
