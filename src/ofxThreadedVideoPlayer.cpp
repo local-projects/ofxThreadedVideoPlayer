@@ -47,6 +47,12 @@ void ofxThreadedVideoPlayer::setAudioDeviceID(string _deviceID){
 	}
 }
 
+string ofxThreadedVideoPlayer::getAudioDeviceID(){
+	if (player){
+		return player->getAudioDeviceID();
+	}
+}
+
 
 
 void ofxThreadedVideoPlayer::deleteMe(){
